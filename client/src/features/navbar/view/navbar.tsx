@@ -44,7 +44,7 @@ export function Header() {
                                         Home
                                     </ListboxItem>
                                     <ListboxItem key="musics" startContent={<Music />} as={Link} href={APP_ROUTES.MUSICS} onPress={onClose} className='px-6 py-4'>
-                                        Musics
+                                        Tracks
                                     </ListboxItem>
                                     <ListboxItem key="albums" startContent={<AlbumIcon />} as={Link} href={APP_ROUTES.ALBUMS} onPress={onClose} className='px-6 py-4'>
                                         Albums

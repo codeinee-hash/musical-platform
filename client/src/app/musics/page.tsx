@@ -6,6 +6,7 @@ import Link from "next/link";
 import {APP_ROUTES} from "@/shared/lib/const";
 import {ITrack} from "@/shared/lib/types";
 import {MusicsList} from "@/features/musics/view/musics-list";
+import {UploadIcon} from "lucide-react";
 
 export default function MusicsPage() {
     const tracks: ITrack[] = [
@@ -20,6 +21,7 @@ export default function MusicsPage() {
                 subtitle="All tracks"
                 actions={
                     <Button variant={'solid'} color={'secondary'} as={Link} href={`${APP_ROUTES.MUSICS}/create`}>
+                        <UploadIcon size={20} />
                         Upload
                     </Button>
                 }

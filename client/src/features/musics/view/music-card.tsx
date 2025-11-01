@@ -6,6 +6,8 @@ import {Image} from "@heroui/image";
 import {Button} from "@heroui/react";
 import {PauseIcon, PlayIcon} from "lucide-react";
 import {useState} from "react";
+import {APP_ROUTES} from "@/shared/lib/const";
+import Link from "next/link";
 
 export function MusicCard({ track, active }: { track: ITrack, active: boolean }) {
     const [imageError, setImageError] = useState(false);
@@ -19,15 +21,25 @@ export function MusicCard({ track, active }: { track: ITrack, active: boolean })
     };
 
     return (
-        <Card className="py-2 hover:-translate-y-2 hover:shadow-xl transition duration-200 ease-in-out">
+        <Card
+            as={Link}
+            href={`${APP_ROUTES.MUSICS}/${track._id}`}
+            className="py-2 hover:-translate-y-2 hover:shadow-xl transition duration-200 ease-in-out cursor-pointer"
+        >
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                 <div className='w-full flex gap-2 justify-between'>
                     <div>
                         <p className="text-tiny uppercase font-bold">{track.artist}</p>
                         <small className="text-default-500">{track.listens} listens</small>
                     </div>
-                    <Button isIconOnly color="primary">
-                        {active ? <PauseIcon /> : <PlayIcon />}
+                    <Button
+                        isIconOnly
+                        size="sm"
+                        variant="light"
+                        color="primary"
+                        onClick={(e) => e.preventDefault()}
+                    >
+                        {active ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
                     </Button>
                 </div>
                 <h4 className="font-bold text-large">{track.name}</h4>

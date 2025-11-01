@@ -7,7 +7,9 @@ export function HeroBlock({ title, subtitle, actions }: { title?: string; subtit
                 <h1 className='text-2xl font-bold'>{title}</h1>
                 {subtitle && <h3 className='font-medium text-gray-400'>{subtitle}</h3>}
             </div>
-            {actions && actions}
+            <div className='flex-shrink-0'>
+                {actions && actions}
+            </div>
         </div>
     );
 }
