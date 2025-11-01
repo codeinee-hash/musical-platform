@@ -1,0 +1,65 @@
+"use client";
+
+import {
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerBody,
+    DrawerFooter,
+    Button,
+    useDisclosure,
+    Listbox,
+    ListboxItem
+} from "@heroui/react";
+import {Navbar, NavbarContent, NavbarItem} from "@heroui/navbar";
+import Link from "next/link";
+import {AlbumIcon, HomeIcon, Menu, Music} from "lucide-react";
+import {APP_ROUTES} from "@/shared/lib/const";
+
+export function Header() {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    return (
+        <>
+            <Navbar isBordered>
+                <NavbarContent justify="start" className='w-full flex justify-between!'>
+                    <NavbarItem>
+                        <Button onPress={onOpen} variant={'flat'} color={'primary'}>
+                            <Menu />
+                        </Button>
+                    </NavbarItem>
+                    <NavbarItem className='text-2xl font-semibold'>
+                        TravisTones
+                    </NavbarItem>
+                </NavbarContent>
+            </Navbar>
+            <Drawer isOpen={isOpen} onOpenChange={onOpenChange} placement="left">
+                <DrawerContent>
+                    {(onClose) => (
+                        <>
+                            <DrawerHeader className="flex flex-col gap-1">Menu</DrawerHeader>
+                            <DrawerBody>
+                                <Listbox aria-label="Navigation menu">
+                                    <ListboxItem key="home" startContent={<HomeIcon />} as={Link} href={APP_ROUTES.HOME} onPress={onClose} className='px-6 py-4'>
+                                        Home
+                                    </ListboxItem>
+                                    <ListboxItem key="musics" startContent={<Music />} as={Link} href={APP_ROUTES.MUSICS} onPress={onClose} className='px-6 py-4'>
+                                        Musics
+                                    </ListboxItem>
+                                    <ListboxItem key="albums" startContent={<AlbumIcon />} as={Link} href={APP_ROUTES.ALBUMS} onPress={onClose} className='px-6 py-4'>
+                                        Albums
+                                    </ListboxItem>
+                                </Listbox>
+                            </DrawerBody>
+                            <DrawerFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    Close
+                                </Button>
+                            </DrawerFooter>
+                        </>
+                    )}
+                </DrawerContent>
+            </Drawer>
+        </>
+    );
+}
