@@ -1,5 +1,6 @@
 import {ReactNode} from "react";
 import {Stepper, Step, StepLabel} from "@/shared/ui/stepper";
+import {Card} from "@heroui/card";
 
 export function CreateTrackStepWrapper({ activeStep, children }: { activeStep: number; children: ReactNode }) {
     const steps = ["Track info", "Upload image", "Upload track"];
@@ -13,7 +14,7 @@ export function CreateTrackStepWrapper({ activeStep, children }: { activeStep: n
                     </Step>
                 ))}
             </Stepper>
-            <div className="bg-card rounded-2xl p-6 shadow-lg border">{children}</div>
+            <Card className="p-6">{children}</Card>
         </div>
     );
 }

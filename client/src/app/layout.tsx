@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import {Header} from "@/features/navbar";
+import {Player} from "@/features/musics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Providers>
                     <Header />
-                    <main className='flex flex-col justify-start max-w-[1024px] mx-auto px-[24px] pt-10'>
+                    <main className='flex flex-col justify-start max-w-[1024px] mx-auto px-[24px] pt-10 pb-20'>
                         {children}
                     </main>
+                    <Player />
                 </Providers>
             </body>
         </html>

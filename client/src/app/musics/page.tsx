@@ -20,7 +20,7 @@ export default function MusicsPage() {
                 title="Tracks"
                 subtitle="All tracks"
                 actions={
-                    <Button variant={'solid'} color={'secondary'} as={Link} href={`${APP_ROUTES.MUSICS}/create`}>
+                    <Button variant={'solid'} color={'primary'} as={Link} href={`${APP_ROUTES.MUSICS}/create`}>
                         <UploadIcon size={20} />
                         Upload
                     </Button>

@@ -2,10 +2,11 @@
 
 import {Button, Input, Textarea} from "@heroui/react";
 import {User} from "lucide-react";
+import {Card} from "@heroui/card";
 
 export function AddCommentForm() {
     return (
-        <div className="bg-card rounded-2xl p-8 border border-border shadow-lg">
+        <Card className="rounded-2xl p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <Input
                     placeholder="Your name"
@@ -25,6 +26,6 @@ export function AddCommentForm() {
                     Post Comment
                 </Button>
             </div>
-        </div>
+        </Card>
     );
 }
