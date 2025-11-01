@@ -21,7 +21,7 @@ export function Stepper({ activeStep, children }: { activeStep: number; children
     }, [children]);
 
     return (
-        <Card className="w-full shadow-lg border mb-6">
+        <Card className="w-full mb-6">
             <CardBody className="p-6">
                 <div className="flex items-center justify-between gap-4">
                     {Children.map(children, (child, index) => {
@@ -47,7 +47,13 @@ export function Stepper({ activeStep, children }: { activeStep: number; children
 
                                 {!isLast && (
                                     <div className={
-                                            `top-5 left-full w-full h-1 transition-all duration-300 ml-4 rounded ${isCompleted ? "bg-primary" : "bg-gray-100"}`
+                                        `top-5 left-full w-full h-1 transition-all duration-300 ml-4 rounded 
+                                            ${isCompleted 
+                                                ? "bg-green-500" 
+                                                : isActive 
+                                                    ? "bg-primary" 
+                                                    : "bg-gray-100"
+                                            }`
                                         }
                                     />
                                 )}
