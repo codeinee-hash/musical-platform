@@ -1,13 +1,9 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
 
-export enum FileType  {
+export enum FileType {
   AUDIO = 'audio',
   IMAGE = 'image',
 }
@@ -28,12 +24,9 @@ export class FileService {
 
       return `${type}/${fileName}`;
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  deleteFile(fileName: string) {
-
-
-  }
+  deleteFile(fileName: string) {}
 }

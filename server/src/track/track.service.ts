@@ -17,14 +17,24 @@ export class TrackService {
   constructor(
     @InjectModel(Track.name) private trackModel: Model<TrackDocument>,
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private fileService: FileService) {}
+    private fileService: FileService,
+  ) {}
 
-  async create(dto: CreateTrackDto, picture: Express.Multer.File, audio: Express.Multer.File): Promise<Track> {
+  async create(
+    dto: CreateTrackDto,
+    picture: Express.Multer.File,
+    audio: Express.Multer.File,
+  ): Promise<Track> {
     try {
       const picturePath = this.fileService.createFile(FileType.IMAGE, picture);
       const audioPath = this.fileService.createFile(FileType.AUDIO, audio);
 
-      const track = await this.trackModel.create({ ...dto, listens: 0, audio: audioPath, picture: picturePath });
+      const track = await this.trackModel.create({
+        ...dto,
+        listens: 0,
+        audio: audioPath,
+        picture: picturePath,
+      });
 
       return track!;
     } catch (error) {
@@ -55,7 +65,7 @@ export class TrackService {
     }
   }
 
-  async delete(id: ObjectId): Promise<{ id: ObjectId, message: string }> {
+  async delete(id: ObjectId): Promise<{ id: ObjectId; message: string }> {
     try {
       const track = await this.trackModel.findByIdAndDelete(id);
 
@@ -75,7 +85,9 @@ export class TrackService {
       const comment = await this.commentModel.create({ ...dto });
 
       if (!track) {
-        throw new NotFoundException('Track with id ' + dto.trackId + ' not found');
+        throw new NotFoundException(
+          'Track with id ' + dto.trackId + ' not found',
+        );
       }
 
       track?.comments.push(comment._id);

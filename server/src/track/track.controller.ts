@@ -5,7 +5,8 @@ import {
   Delete,
   Get,
   Param,
-  Post, Query,
+  Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -20,15 +21,17 @@ export class TrackController {
   constructor(private trackService: TrackService) {}
 
   @Post('')
-  @UseInterceptors(FileFieldsInterceptor([
-    { name: 'picture', maxCount: 1 },
-    { name: 'audio', maxCount: 1 },
-  ]))
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'picture', maxCount: 1 },
+      { name: 'audio', maxCount: 1 },
+    ]),
+  )
   createTrack(
-    @UploadedFiles() files: { picture?: Express.Multer.File[], audio?: Express.Multer.File[] },
-    @Body() dto: CreateTrackDto
+    @UploadedFiles()
+    files: { picture?: Express.Multer.File[]; audio?: Express.Multer.File[] },
+    @Body() dto: CreateTrackDto,
   ) {
-
     const { picture, audio } = files;
 
     if (!picture || !audio) {
