@@ -53,8 +53,6 @@ export function Header() {
             <>
               <DrawerHeader className="flex flex-col gap-1">Menu</DrawerHeader>
               <DrawerBody>
-                {" "}
-                qb
                 <Listbox
                   aria-label="Navigation menu"
                   variant={"flat"}
