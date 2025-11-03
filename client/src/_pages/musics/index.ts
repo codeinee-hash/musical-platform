@@ -1,1 +1,1 @@
-export { MusicsPage } from './view/musics-page';
+export { MusicsPage } from "./view/musics-page";

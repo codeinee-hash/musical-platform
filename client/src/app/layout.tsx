@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { HerouiProvider } from "./_providers/heroui-provider";
-import {Header} from "@/features/navbar";
-import {Player} from "@/features/musics";
+import { Header } from "@/features/navbar";
+import { Player } from "@/features/musics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,21 +17,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Musical platform",
-  description: "Modern full-stack music platform built with Next.js and NestJS.",
+  description:
+    "Modern full-stack music platform built with Next.js and NestJS.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    return (
-        <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <HerouiProvider>
-                    <Header />
-                    <main className='flex flex-col justify-start max-w-[1024px] mx-auto px-[24px] pt-10 pb-20'>
-                        {children}
-                    </main>
-                    <Player />
-                </HerouiProvider>
-            </body>
-        </html>
-    );
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <HerouiProvider>
+          <Header />
+          <main className="flex flex-col justify-start max-w-[1024px] mx-auto px-[24px] pt-10 pb-20">
+            {children}
+          </main>
+          <Player />
+        </HerouiProvider>
+      </body>
+    </html>
+  );
 }
