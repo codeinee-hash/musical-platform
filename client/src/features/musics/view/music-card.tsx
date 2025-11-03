@@ -4,21 +4,18 @@ import {ITrack} from "@/shared/lib/types";
 import {Card, CardHeader, CardBody} from "@heroui/card";
 import {Image} from "@heroui/image";
 import {Button} from "@heroui/react";
-import {PauseIcon, PlayIcon} from "lucide-react";
-import {useState} from "react";
-import {APP_ROUTES} from "@/shared/lib/const";
+import {PlayIcon} from "lucide-react";
+import {APP_ROUTES, BASE_API_URL} from "@/shared/lib/const";
 import Link from "next/link";
+import {usePlayer} from "@/features/musics";
 
-export function MusicCard({ track, active }: { track: ITrack, active: boolean }) {
-    const [imageError, setImageError] = useState(false);
-    const [imageSrc, setImageSrc] = useState(track.picture || "/image-placeholder.png");
+export function MusicCard({ track }: { track: ITrack }) {
+    const { setActiveTrack } = usePlayer();
 
-    const handleImageError = () => {
-        if (!imageError) {
-            setImageError(true);
-            setImageSrc('/image-placeholder.png');
-        }
-    };
+    const play = (e: MouseEvent) => {
+        e.preventDefault();
+        setActiveTrack(track);
+    }
 
     return (
         <Card
@@ -37,21 +34,19 @@ export function MusicCard({ track, active }: { track: ITrack, active: boolean })
                         size="sm"
                         variant="light"
                         color="primary"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={play}
                     >
-                        {active ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
+                        {<PlayIcon size={16} />}
                     </Button>
                 </div>
                 <h4 className="font-bold text-large">{track.name}</h4>
-                {active && <span className="text-default-500">02:42 / 03:34</span>}
             </CardHeader>
             <CardBody className="overflow-visible py-2">
                 <Image
                     alt={track.name}
                     className="object-cover rounded-xl"
-                    src={imageSrc}
+                    src={`${BASE_API_URL}${track.picture}`}
                     width={270}
-                    onError={handleImageError}
                 />
             </CardBody>
         </Card>
