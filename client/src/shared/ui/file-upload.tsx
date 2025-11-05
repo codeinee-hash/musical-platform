@@ -17,8 +17,6 @@ export function FileUpload({
     const selectedFile = e.target.files?.[0] || null;
     if (selectedFile) setFile(selectedFile);
     else setFile(null);
-
-    console.log("Selected file", selectedFile);
   };
 
   const handleClick = () => {

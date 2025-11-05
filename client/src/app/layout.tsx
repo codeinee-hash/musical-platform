@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import { HerouiProvider } from "./_providers/heroui-provider";
 import { Header } from "@/features/navbar";
 import { Player } from "@/features/musics";
@@ -35,6 +36,7 @@ export default function RootLayout({
             {children}
           </main>
           <Player />
+          <Toaster richColors position="top-right" />
         </HerouiProvider>
       </body>
     </html>

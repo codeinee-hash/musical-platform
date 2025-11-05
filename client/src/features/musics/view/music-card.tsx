@@ -3,18 +3,25 @@
 import { ITrack } from "@/shared/lib/types";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { Button } from "@heroui/react";
-import { PlayIcon } from "lucide-react";
+import { PlayIcon, TrashIcon } from "lucide-react";
 import { APP_ROUTES, BASE_API_URL } from "@/shared/lib/const";
 import Link from "next/link";
-import { usePlayer } from "@/features/musics";
+import { trackService, usePlayer, useTracks } from "@/features/musics";
+import { MouseEvent } from "react";
 
 export function MusicCard({ track }: { track: ITrack }) {
-  const { setActiveTrack } = usePlayer();
+  const setActiveTrack = usePlayer((state) => state.setActiveTrack);
+  const setTracks = useTracks((state) => state.setTracks);
 
-  const play = (e: MouseEvent) => {
+  const play = (e: MouseEvent<SVGSVGElement>) => {
     e.preventDefault();
     setActiveTrack(track);
+  };
+
+  const removeTrack = async (e: MouseEvent<SVGSVGElement>) => {
+    e.preventDefault();
+    await trackService.deleteTrack(track._id);
+    setTracks();
   };
 
   return (
@@ -29,15 +36,10 @@ export function MusicCard({ track }: { track: ITrack }) {
             <p className="text-tiny uppercase font-bold">{track.artist}</p>
             <small className="text-default-500">{track.listens} listens</small>
           </div>
-          <Button
-            isIconOnly
-            size="sm"
-            variant="light"
-            color="primary"
-            onClick={play}
-          >
-            {<PlayIcon size={16} />}
-          </Button>
+          <div className="flex gap-2">
+            <PlayIcon size={16} onClick={play} color={"blue"} />
+            <TrashIcon size={16} onClick={removeTrack} color={"red"} />
+          </div>
         </div>
         <h4 className="font-bold text-large">{track.name}</h4>
       </CardHeader>
