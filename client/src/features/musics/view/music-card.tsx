@@ -6,12 +6,13 @@ import { Image } from "@heroui/image";
 import { PlayIcon, TrashIcon } from "lucide-react";
 import { APP_ROUTES, BASE_API_URL } from "@/shared/lib/const";
 import Link from "next/link";
-import { trackService, usePlayer, useTracks } from "@/features/musics";
+import { usePlayer } from "@/features/musics";
 import { MouseEvent } from "react";
+import { deleteTrackAction } from "@/features/musics";
+import { toast } from "sonner";
 
 function MusicCard({ track }: { track: ITrack }) {
   const setActiveTrack = usePlayer((state) => state.setActiveTrack);
-  const setTracks = useTracks((state) => state.setTracks);
 
   const play = (e: MouseEvent<SVGSVGElement>) => {
     e.preventDefault();
@@ -20,8 +21,11 @@ function MusicCard({ track }: { track: ITrack }) {
 
   const removeTrack = async (e: MouseEvent<SVGSVGElement>) => {
     e.preventDefault();
-    await trackService.deleteTrack(track._id);
-    setTracks();
+
+    const result = await deleteTrackAction(track._id);
+
+    if (result.success) toast.success("Track deleted");
+    else toast.error("Error deleting track");
   };
 
   return (

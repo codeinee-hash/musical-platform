@@ -1,6 +1,5 @@
 import { IComment, ITrack } from "@/shared/lib/types";
 import { requester } from "@/shared/lib/api";
-import { toast } from "sonner";
 
 async function getTracks(): Promise<ITrack[]> {
   try {
@@ -44,7 +43,6 @@ async function addComment(payload: {
 async function deleteTrack(id: string) {
   try {
     await requester.delete(`tracks/${id}`);
-    toast.success("Track deleted");
   } catch (error) {
     throw error;
   }

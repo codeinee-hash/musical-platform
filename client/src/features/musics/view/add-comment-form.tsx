@@ -4,25 +4,34 @@ import { Button, Input, Textarea } from "@heroui/react";
 import { User } from "lucide-react";
 import { Card } from "@heroui/card";
 import { useInput } from "@/shared/hooks/use-input";
-import { trackService, useTracks } from "@/features/musics";
+import { addCommentAction } from "@/features/musics";
+import { toast } from "sonner";
 
 export function AddCommentForm({ trackId }: { trackId: string }) {
   const username = useInput("");
   const text = useInput("");
 
-  const { setComment } = useTracks();
-
   const handleAddComment = async () => {
-    const newComment = await trackService.addComment({
+    console.log(
+      "trackId:",
+      trackId,
+      "username:",
+      username.value,
+      "text:",
+      text.value,
+    );
+    const result = await addCommentAction({
       username: username.value,
       text: text.value,
       trackId,
     });
 
-    setComment(newComment);
-
     username.setValue("");
     text.setValue("");
+
+    if (result.error) {
+      toast.error("Error adding comment");
+    }
   };
 
   return (
