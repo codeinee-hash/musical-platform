@@ -8,11 +8,12 @@ import { FileUpload } from "@/shared/ui/file-upload";
 import { useInput } from "@/shared/hooks/use-input";
 import { redirect } from "next/navigation";
 import { APP_ROUTES } from "@/shared/lib/const";
+import { Image } from "@heroui/image";
 
 export default function UploadTrackPage() {
   const [activeStep, setActiveStep] = useState(0);
-  const [picture, setPicture] = useState(null);
-  const [audio, setAudio] = useState(null);
+  const [picture, setPicture] = useState<File | null>(null);
+  const [audio, setAudio] = useState<File | null>(null);
 
   const name = useInput("");
   const artist = useInput("");
@@ -70,16 +71,33 @@ export default function UploadTrackPage() {
                   <UploadIcon size={18} />
                 </div>
               </FileUpload>
+              {picture && (
+                <Image
+                  src={URL.createObjectURL(picture)}
+                  alt={picture.name}
+                  width={200}
+                  height={200}
+                  onLoad={(e) => URL.revokeObjectURL(e.currentTarget.src)}
+                  className="mt-4"
+                />
+              )}
             </>
           )}
 
           {activeStep === 2 && (
-            <FileUpload setFile={setAudio} accept={"audio/*"}>
-              <div className="rounded-lg bg-primary-50 flex items-center gap-2 px-4 py-2 cursor-pointer active:bg-primary-100 transition font-semibold">
-                Upload track
-                <UploadIcon size={18} />
-              </div>
-            </FileUpload>
+            <>
+              <FileUpload setFile={setAudio} accept={"audio/*"}>
+                <div className="rounded-lg bg-primary-50 flex items-center gap-2 px-4 py-2 cursor-pointer active:bg-primary-100 transition font-semibold">
+                  Upload track
+                  <UploadIcon size={18} />
+                </div>
+              </FileUpload>
+              {audio && (
+                <p className="text-slate-400 font-semibold text-xl mt-4">
+                  {audio?.name}
+                </p>
+              )}
+            </>
           )}
         </div>
       </CreateTrackStepWrapper>

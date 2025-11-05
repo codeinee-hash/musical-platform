@@ -7,7 +7,7 @@ export function FileUpload({
   accept,
   children,
 }: {
-  setFile: (file: any) => void;
+  setFile: (file: File | null) => void;
   accept: string;
   children: ReactNode;
 }) {
@@ -17,6 +17,8 @@ export function FileUpload({
     const selectedFile = e.target.files?.[0] || null;
     if (selectedFile) setFile(selectedFile);
     else setFile(null);
+
+    console.log(selectedFile);
   };
 
   const handleClick = () => {
