@@ -38,7 +38,7 @@ export function Header() {
             as={Link}
             href={APP_ROUTES.HOME}
           >
-            TravisTones
+            Codeinee
           </NavbarItem>
         </NavbarContent>
       </Navbar>

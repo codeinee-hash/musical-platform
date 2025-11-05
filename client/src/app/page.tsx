@@ -22,6 +22,11 @@ export default function Home() {
           </Button>
         }
       />
+
+      <p className="text-xl text-center font-semibold text-slate-400 mt-10">
+        Upload tracks, collect albums, discover new artists, and share moments.
+        Music isn't just background music. It's a mood.
+      </p>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { trackService, usePlayer, useTracks } from "@/features/musics";
 import { MouseEvent } from "react";
 
-export function MusicCard({ track }: { track: ITrack }) {
+function MusicCard({ track }: { track: ITrack }) {
   const setActiveTrack = usePlayer((state) => state.setActiveTrack);
   const setTracks = useTracks((state) => state.setTracks);
 
@@ -54,3 +54,5 @@ export function MusicCard({ track }: { track: ITrack }) {
     </Card>
   );
 }
+
+export default MusicCard;

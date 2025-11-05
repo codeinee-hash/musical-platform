@@ -1,5 +1,5 @@
 import { ITrack } from "@/shared/lib/types";
-import { MusicCard } from "@/features/musics/view/music-card";
+import MusicCard from "@/features/musics/view/music-card";
 
 export function MusicsList({ tracks }: { tracks: ITrack[] }) {
   if (tracks.length === 0) {
