@@ -14,17 +14,20 @@ export async function deleteTrackAction(trackId: string) {
   }
 }
 
-export async function addCommentAction(payload: {
-  username: string;
-  trackId: string;
-  text: string;
-}) {
+export async function addCommentAction(formData: FormData) {
   try {
-    await trackService.addComment(payload);
-    revalidatePath(`/musics/${payload.trackId}`);
+    const username = formData.get("username") as string;
+    const text = formData.get("text") as string;
+    const trackId = formData.get("trackId") as string;
+
+    if (!username || !text) {
+      return { success: false, error: "All fields are required" };
+    }
+
+    await trackService.addComment({ username, text, trackId });
+    revalidatePath(`/musics/${trackId}`);
     return { success: true };
   } catch (error) {
-    console.error("Failed to add comment:", error);
     return { success: false, error: "Failed to add comment" };
   }
 }
