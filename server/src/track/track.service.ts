@@ -8,7 +8,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { Track, TrackDocument } from './schema/track.schema';
 import { Comment, CommentDocument } from './schema/comment.schema';
-import { CreateTrackDto } from './dto/track.dto';
+import { CreateTrackDto } from './dto/create-track.dto';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { FileService, FileType } from '../file/file.service';
 

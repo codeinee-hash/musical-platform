@@ -11,7 +11,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { TrackService } from './track.service';
-import { CreateTrackDto } from './dto/track.dto';
+import { CreateTrackDto } from './dto/create-track.dto';
 import * as mongoose from 'mongoose';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';

@@ -4,6 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TrackModule } from './track/track.module';
 import { FileModule } from './file/file.module';
+import { AlbumModule } from './albums/album.module';
 import { config } from './config/config';
 
 @Module({
@@ -12,6 +13,7 @@ import { config } from './config/config';
     MongooseModule.forRoot(config.environments.DATABASE_URL),
     TrackModule,
     FileModule,
+    AlbumModule,
   ],
 })
 export class AppModule {}
