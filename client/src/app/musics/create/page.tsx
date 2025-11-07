@@ -65,7 +65,11 @@ export default function UploadTrackPage() {
 
           {activeStep === 1 && (
             <>
-              <FileUpload setFile={setPicture} accept={"image/*"}>
+              <FileUpload
+                setFile={setPicture}
+                accept={"image/*"}
+                name={"picture"}
+              >
                 <div className="rounded-lg bg-primary-50 flex items-center gap-2 px-4 py-2 cursor-pointer active:bg-primary-100 transition font-semibold">
                   Upload image
                   <UploadIcon size={18} />
@@ -86,7 +90,7 @@ export default function UploadTrackPage() {
 
           {activeStep === 2 && (
             <>
-              <FileUpload setFile={setAudio} accept={"audio/*"}>
+              <FileUpload setFile={setAudio} accept={"audio/*"} name={"audio"}>
                 <div className="rounded-lg bg-primary-50 flex items-center gap-2 px-4 py-2 cursor-pointer active:bg-primary-100 transition font-semibold">
                   Upload track
                   <UploadIcon size={18} />

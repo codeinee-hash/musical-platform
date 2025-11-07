@@ -14,3 +14,12 @@ export interface ITrack {
   audio: string;
   comments: IComment[];
 }
+
+export interface IAlbum {
+  _id: string;
+  title: string;
+  artist: string;
+  description: string;
+  picture: string;
+  tracks: ITrack[];
+}

@@ -34,8 +34,6 @@ export class AlbumController {
     @UploadedFile() file: Express.Multer.File,
     @Body() dto: CreateAlbumDto,
   ) {
-    console.log('picture album: ', file);
-
     if (!file) {
       throw new BadRequestException('Picture file are required');
     }

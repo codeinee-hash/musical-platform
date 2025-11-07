@@ -5,10 +5,12 @@ import { ChangeEvent, ReactNode, useRef } from "react";
 export function FileUpload({
   setFile,
   accept,
+  name,
   children,
 }: {
   setFile: (file: File | null) => void;
   accept: string;
+  name: string;
   children: ReactNode;
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -17,8 +19,6 @@ export function FileUpload({
     const selectedFile = e.target.files?.[0] || null;
     if (selectedFile) setFile(selectedFile);
     else setFile(null);
-
-    console.log(selectedFile);
   };
 
   const handleClick = () => {
@@ -31,6 +31,7 @@ export function FileUpload({
       <input
         ref={inputRef!}
         type="file"
+        name={name}
         accept={accept}
         onChange={onChange}
         className="hidden"

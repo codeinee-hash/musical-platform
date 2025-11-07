@@ -24,19 +24,13 @@ export class AlbumService {
     picture: Express.Multer.File,
   ): Promise<Album> {
     try {
-      console.log('dto in create album: ', dto);
       if (dto.tracks?.length) {
         const tracks = await this.trackModel
           .find({ _id: { $in: dto.tracks } })
           .exec();
 
-        console.log('tracks in album service', tracks);
         if (tracks.length === 0) {
           throw new BadRequestException('No tracks found for the provided IDs');
-        }
-
-        if (tracks.length !== dto.tracks.length) {
-          throw new BadRequestException('Some tracks do not exist');
         }
       }
 

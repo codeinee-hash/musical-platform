@@ -62,7 +62,7 @@ export function Player() {
   }
 
   return (
-    <div className="h-[80px] w-full fixed bottom-0 bg-slate-100">
+    <div className="h-[80px] w-full fixed bottom-0 bg-slate-100 z-20">
       <div className="h-full max-w-[1200px] mx-auto px-[24px] flex gap-30 items-center justify-between">
         <div className="flex items-center gap-3">
           <Button
