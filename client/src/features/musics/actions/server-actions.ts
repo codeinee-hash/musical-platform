@@ -14,7 +14,10 @@ export async function deleteTrackAction(trackId: string) {
   }
 }
 
-export async function addCommentAction(formData: FormData) {
+export async function addCommentAction(
+  prevState: { success: boolean | null; error: string },
+  formData: FormData,
+) {
   try {
     const username = formData.get("username") as string;
     const text = formData.get("text") as string;
@@ -26,7 +29,7 @@ export async function addCommentAction(formData: FormData) {
 
     await trackService.addComment({ username, text, trackId });
     revalidatePath(`/musics/${trackId}`);
-    return { success: true };
+    return { success: true, error: "" };
   } catch (error) {
     return { success: false, error: "Failed to add comment" };
   }

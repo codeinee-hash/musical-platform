@@ -6,19 +6,28 @@ import { Card } from "@heroui/card";
 import { addCommentAction } from "@/features/musics";
 import { toast } from "sonner";
 import Form from "next/form";
+import { useActionState, useEffect, useRef } from "react";
 
 export function AddCommentForm({ trackId }: { trackId: string }) {
-  async function handleSubmit(formData: FormData) {
-    const result = await addCommentAction(formData);
+  const [state, formAction] = useActionState(addCommentAction, {
+    success: null as boolean | null,
+    error: "" as string,
+  });
+  const formRef = useRef<HTMLFormElement>(null);
 
-    if (result.error) toast.error(result.error);
-    else toast.success("Comment added successfully");
-  }
+  useEffect(() => {
+    if (!state.success && state.error) toast.error(state.error);
+    if (state.success) {
+      toast.success("Comment added successfully");
+      formRef.current?.reset();
+    }
+  }, [state]);
 
   return (
     <Card className="rounded-2xl p-8">
       <Form
-        action={handleSubmit}
+        ref={formRef}
+        action={formAction}
         className="grid grid-cols-1 lg:grid-cols-3 gap-6"
       >
         <Input
